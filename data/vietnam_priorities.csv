@@ -1,0 +1,4 @@
+profile,weight_growth,weight_productivity,weight_spillover,weight_export,weight_employment,weight_ai_readiness,weight_risk
+default,0.15,0.15,0.20,0.15,0.10,0.20,0.15
+growth_oriented,0.22,0.22,0.14,0.20,0.07,0.10,0.05
+inclusive_oriented,0.08,0.10,0.22,0.05,0.22,0.13,0.20

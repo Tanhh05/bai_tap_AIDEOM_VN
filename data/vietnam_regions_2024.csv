@@ -1,0 +1,7 @@
+region_id,region_code,region_name_vi,grdp_per_capita_million_VND,fdi_registered_billion_USD,digital_index_0_100,ai_readiness_0_100,trained_labor_pct,rd_intensity_pct,internet_penetration_pct,gini_coef,impact_I,impact_D,impact_AI,impact_H,emission_coef,risk_ai_coef,risk_reduction_h_coef
+1,NMM,Trung du mien nui phia Bac,57.0,3.5,38,22,21.5,0.18,72,0.405,1.15,0.85,0.55,1.30,0.42,0.18,0.32
+2,RRD,Dong bang song Hong,152.3,20.0,78,68,36.8,0.85,92,0.358,0.95,1.25,1.40,1.05,0.55,0.45,0.28
+3,NCC,Bac Trung Bo va DH Trung Bo,87.5,8.2,55,40,27.5,0.32,84,0.372,1.05,0.95,0.85,1.15,0.48,0.28,0.30
+4,CH,Tay Nguyen,68.9,0.8,32,18,18.2,0.15,68,0.412,1.20,0.75,0.45,1.35,0.32,0.12,0.35
+5,SE,Dong Nam Bo,158.9,18.5,82,75,42.5,0.78,94,0.385,0.90,1.30,1.55,1.00,0.62,0.52,0.25
+6,MD,Dong bang song Cuu Long,80.5,2.1,48,30,16.8,0.22,78,0.392,1.10,0.85,0.65,1.25,0.38,0.22,0.30

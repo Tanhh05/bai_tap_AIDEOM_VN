@@ -1,0 +1,4 @@
+case,status,total_NetJob
+base,optimal,1650000.0
+displacement_limit,optimal,1650000.0
+sector2_min_H_if_all_AI,formula,-6741.428571428573

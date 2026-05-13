@@ -1,0 +1,5 @@
+model,status,Z
+fairness_hard,infeasible,
+fairness_with_slack,optimal,52485.0
+no_fairness,optimal,68750.0
+cvxpy_hard_fairness,infeasible,-inf

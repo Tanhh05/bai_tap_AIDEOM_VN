@@ -1,0 +1,9 @@
+case,status,Z,x_I,x_D,EVPI_or_x_AI,VSS_or_x_H
+stochastic_pulp,optimal,98575.0,0.0,0.0,65000.0,0.0
+stochastic_pyomo,optimal,98575.0,0.0,0.0,65000.0,0.0
+expected_value_policy,optimal,98575.0,0.0,0.0,65000.0,0.0
+deterministic_s1,optimal,101500.0,0.0,0.0,65000.0,0.0
+deterministic_s2,optimal,97750.0,0.0,0.0,65000.0,0.0
+deterministic_s3,optimal,96250.0,0.0,0.0,65000.0,0.0
+deterministic_s4,optimal,97750.0,0.0,0.0,65000.0,0.0
+metrics,computed,98575.0,0.0,0.0,0.0,0.0

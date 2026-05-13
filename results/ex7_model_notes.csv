@@ -1,0 +1,2 @@
+parameter,value,note
+fairness_C5,omitted,PDF lambda=0.70 is infeasible under regional budget cap 12000 as shown in Exercise 4; Exercise 7 keeps C1-C4 and C6 for feasible NSGA-II search.

@@ -1,0 +1,10 @@
+profile,rank,sector_name_vi,Priority
+default,1,CN che bien che tao,0.6120505786469759
+default,2,CNTT-Truyen thong,0.583902072171835
+default,3,Tai chinh-Ngan hang,0.5617834548386609
+growth_oriented,1,CN che bien che tao,0.6461948537730388
+growth_oriented,2,CNTT-Truyen thong,0.6196374020200563
+growth_oriented,3,Tai chinh-Ngan hang,0.5491841507026527
+inclusive_oriented,1,CN che bien che tao,0.5018166032312321
+inclusive_oriented,2,Tai chinh-Ngan hang,0.42807664475007323
+inclusive_oriented,3,CNTT-Truyen thong,0.3565749659632083

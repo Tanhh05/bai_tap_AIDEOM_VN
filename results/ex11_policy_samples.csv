@@ -1,0 +1,6 @@
+state_name,state,action_id,action_name
+VN_2026,"[1, 1, 0, 1]",2,So hoa nhanh
+low_low_highU,"[0, 0, 0, 2]",0,Truyen thong
+high_ai_lowU,"[2, 2, 2, 0]",3,AI dan dat
+medium_all,"[1, 1, 1, 1]",0,Truyen thong
+digital_low,"[1, 0, 1, 1]",0,Truyen thong

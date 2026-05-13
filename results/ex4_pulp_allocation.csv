@@ -1,0 +1,7 @@
+region_code,region_name_vi,I,D,AI,H,total,fairness_slack
+NMM,Trung du mien nui phia Bac,0.0,9700.0,0.0,2300.0,12000.0,0.0
+RRD,Dong bang song Hong,0.0,0.0,5000.0,0.0,5000.0,0.0
+NCC,Bac Trung Bo va DH Trung Bo,0.0,1200.0,0.0,3800.0,5000.0,0.0
+CH,Tay Nguyen,0.0,12000.0,0.0,0.0,12000.0,1.4
+SE,Dong Nam Bo,0.0,0.0,5400.0,0.0,5400.0,0.0
+MD,Dong bang song Cuu Long,0.0,4700.0,0.0,5900.0,10600.0,0.0
