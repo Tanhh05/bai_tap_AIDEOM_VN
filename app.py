@@ -477,13 +477,19 @@ def render_sidebar() -> str:
 
 exercise = render_sidebar()
 
-st.markdown('<div class="main-title">VN Bài 12 - AIDEOM-VN Dashboard tích hợp</div>', unsafe_allow_html=True)
+page_title = "AIDEOM-VN Dashboard" if exercise == "Trang chủ" else exercise
+st.markdown(f'<div class="main-title">{page_title}</div>', unsafe_allow_html=True)
 st.markdown(
     '<div class="soft-caption">Mô hình AIDEOM-VN tích hợp 6 module: Dự báo, ngân sách số, phân bổ vùng, lao động, rủi ro và chính sách.</div>',
     unsafe_allow_html=True,
 )
 
-top_tab, model_tab, policy_tab = st.tabs(["Bài tập", "Dashboard M1-M4", "Nhận xét chính sách"])
+if exercise == "Bài 12 - Tích hợp hệ thống":
+    top_tab, model_tab, policy_tab = st.tabs(["Bài tập", "Dashboard M1-M4", "Nhận xét chính sách"])
+else:
+    top_tab = st.container()
+    model_tab = None
+    policy_tab = None
 
 with top_tab:
     if exercise == "Trang chủ":
@@ -723,40 +729,42 @@ with top_tab:
 
     render_exercise_analysis(exercise)
 
-with model_tab:
-    st.subheader("Dashboard M1-M4")
-    scenario_df = read_csv("ex12_scenario_dashboard_summary.csv")
-    if scenario_df is not None:
-        radar_chart(scenario_df)
-        left, right = st.columns(2)
-        with left:
-            chart_block(scenario_df, "M1 - GDP dự báo 2030", "scenario", ["GDP_2030"])
-            chart_block(scenario_df, "M2 - Phân bổ K-D-AI-H", "scenario", ["K", "D", "AI", "H"])
-        with right:
-            chart_block(scenario_df, "M3 - Trạng thái 2030", "scenario", ["K_2030", "D_2030", "AI_2030", "H_2030"])
-            st.dataframe(scenario_df, width="stretch")
-    else:
-        st.warning("Chưa có dữ liệu tích hợp Bài 12.")
+if model_tab is not None:
+    with model_tab:
+        st.subheader("Dashboard M1-M4")
+        scenario_df = read_csv("ex12_scenario_dashboard_summary.csv")
+        if scenario_df is not None:
+            radar_chart(scenario_df)
+            left, right = st.columns(2)
+            with left:
+                chart_block(scenario_df, "M1 - GDP dự báo 2030", "scenario", ["GDP_2030"])
+                chart_block(scenario_df, "M2 - Phân bổ K-D-AI-H", "scenario", ["K", "D", "AI", "H"])
+            with right:
+                chart_block(scenario_df, "M3 - Trạng thái 2030", "scenario", ["K_2030", "D_2030", "AI_2030", "H_2030"])
+                st.dataframe(scenario_df, width="stretch")
+        else:
+            st.warning("Chưa có dữ liệu tích hợp Bài 12.")
 
-with policy_tab:
-    st.subheader("Nhận xét chính sách")
-    scenario_df = read_csv("ex12_scenario_dashboard_summary.csv")
-    if scenario_df is not None:
-        scored = scenario_df.copy()
-        scored["balanced_score"] = normalized_score(scored, ["GDP_2030", "D_2030", "AI_2030", "H_2030"])
-        risky = scenario_df[~scenario_df["risk_flags"].eq("OK")]
-        c1, c2, c3 = st.columns(3)
-        c1.metric("Kịch bản", len(scenario_df))
-        c2.metric("Có cảnh báo", len(risky))
-        c3.metric("GDP 2030 TB", f"{scenario_df['GDP_2030'].mean():,.0f}")
-        st.markdown(scenario_policy_text(scenario_df))
-        left, right = st.columns(2)
-        with left:
-            chart_block(scored, "Điểm cân bằng chuẩn hóa", "scenario", ["balanced_score"])
-        with right:
-            chart_block(scenario_df, "So sánh GDP và năng lực số", "scenario", ["GDP_2030", "D_2030", "AI_2030", "H_2030"], "line")
-        st.markdown(
-            """
+if policy_tab is not None:
+    with policy_tab:
+        st.subheader("Nhận xét chính sách")
+        scenario_df = read_csv("ex12_scenario_dashboard_summary.csv")
+        if scenario_df is not None:
+            scored = scenario_df.copy()
+            scored["balanced_score"] = normalized_score(scored, ["GDP_2030", "D_2030", "AI_2030", "H_2030"])
+            risky = scenario_df[~scenario_df["risk_flags"].eq("OK")]
+            c1, c2, c3 = st.columns(3)
+            c1.metric("Kịch bản", len(scenario_df))
+            c2.metric("Có cảnh báo", len(risky))
+            c3.metric("GDP 2030 TB", f"{scenario_df['GDP_2030'].mean():,.0f}")
+            st.markdown(scenario_policy_text(scenario_df))
+            left, right = st.columns(2)
+            with left:
+                chart_block(scored, "Điểm cân bằng chuẩn hóa", "scenario", ["balanced_score"])
+            with right:
+                chart_block(scenario_df, "So sánh GDP và năng lực số", "scenario", ["GDP_2030", "D_2030", "AI_2030", "H_2030"], "line")
+            st.markdown(
+                """
 **Khuyến nghị mở rộng phân tích.** Dashboard hiện có thể dùng như bản mẫu AIDEOM-VN để đọc nhanh từng module,
 nhưng khi làm báo cáo dài hơn nên bổ sung ba lớp phân tích. Lớp thứ nhất là phân tích độ nhạy: thay đổi ngân sách,
 trọng số AI, ngưỡng fairness và năng lực đào tạo để xem kết quả đảo chiều ở đâu. Lớp thứ hai là phân tích rủi ro:
@@ -768,8 +776,8 @@ rủi ro xã hội. Nếu một kịch bản có GDP trung bình nhưng điểm 
 trong bối cảnh chính sách công. Với những kịch bản có nhiều cảnh báo, không nên loại bỏ ngay; thay vào đó cần xem cảnh báo là
 danh sách điều kiện đi kèm trước khi triển khai.
 """
-        )
-        st.dataframe(scenario_df[["scenario", "GDP_2030", "risk_flags"]], width="stretch")
-    else:
-        st.warning("Chưa có dữ liệu để tạo nhận xét chính sách.")
-    st.info("Các biểu đồ dùng trực tiếp dữ liệu trong thư mục `results`, nên khi chạy lại script kết quả dashboard sẽ tự cập nhật.")
+            )
+            st.dataframe(scenario_df[["scenario", "GDP_2030", "risk_flags"]], width="stretch")
+        else:
+            st.warning("Chưa có dữ liệu để tạo nhận xét chính sách.")
+        st.info("Các biểu đồ dùng trực tiếp dữ liệu trong thư mục `results`, nên khi chạy lại script kết quả dashboard sẽ tự cập nhật.")
