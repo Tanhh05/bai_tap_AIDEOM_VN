@@ -12,23 +12,21 @@ st.set_page_config(page_title="AIDEOM-VN Dashboard", layout="wide")
 root = Path(__file__).resolve().parent
 results_dir = root / "results"
 
-MENU_ITEMS = [
-    ("🏠", "Trang chủ", "Trang chủ"),
-    ("📈", "Bài 1", "Bài 1 - Cobb-Douglas + TFP"),
-    ("💰", "Bài 2", "Bài 2 - LP ngân sách số"),
-    ("🏭", "Bài 3", "Bài 3 - Priority 10 ngành"),
-    ("🗺️", "Bài 4", "Bài 4 - LP ngành-vùng"),
-    ("🛡️", "Bài 5", "Bài 5 - MIP 15 dự án"),
-    ("🏆", "Bài 6", "Bài 6 - TOPSIS 6 vùng"),
-    ("🌐", "Bài 7", "Bài 7 - NSGA-II Pareto"),
-    ("⏳", "Bài 8", "Bài 8 - Động 2026-2035"),
-    ("👷", "Bài 9", "Bài 9 - Lao động & AI"),
-    ("🎲", "Bài 10", "Bài 10 - Stochastic SP"),
-    ("🤖", "Bài 11", "Bài 11 - Q-learning RL"),
-    ("VN", "Bài 12", "Bài 12 - AIDEOM tích hợp"),
-]
-
-LABEL_TO_KEY = {f"{icon}  {short} — {title.split(' - ', 1)[-1] if ' - ' in title else title}": title for icon, short, title in MENU_ITEMS}
+MENU_OPTIONS = {
+    "Trang chủ": "Trang chủ",
+    "Bài 1 - Cobb-Douglas + TFP": "Bài 1 - Cobb-Douglas + TFP",
+    "Bài 2 - LP ngân sách": "Bài 2 - LP ngân sách số",
+    "Bài 3 - Priority ngành": "Bài 3 - Priority 10 ngành",
+    "Bài 4 - LP đa vùng": "Bài 4 - LP ngành-vùng",
+    "Bài 5 - MIP dự án": "Bài 5 - MIP 15 dự án",
+    "Bài 6 - TOPSIS": "Bài 6 - TOPSIS 6 vùng",
+    "Bài 7 - Đa mục tiêu": "Bài 7 - NSGA-II Pareto",
+    "Bài 8 - Tối ưu động": "Bài 8 - Động 2026-2035",
+    "Bài 9 - Việc làm ròng": "Bài 9 - Lao động & AI",
+    "Bài 10 - Stochastic Programming": "Bài 10 - Stochastic SP",
+    "Bài 11 - Q-learning": "Bài 11 - Q-learning RL",
+    "Bài 12 - Tích hợp hệ thống": "Bài 12 - AIDEOM tích hợp",
+}
 
 
 st.markdown(
@@ -37,32 +35,6 @@ st.markdown(
     .stApp {
         background: radial-gradient(circle at 75% 0%, #2f3a46 0, #1f2730 32%, #151a21 100%);
         color: #eef3f7;
-    }
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #4d5659 0%, #3a4246 52%, #30383d 100%);
-        border-right: 1px solid rgba(255,255,255,.12);
-    }
-    [data-testid="stSidebar"] * {
-        color: #eef3f7;
-    }
-    [data-testid="stSidebar"] [role="radiogroup"] label {
-        border-radius: 7px;
-        padding: .45rem .65rem;
-        margin: .12rem 0;
-        min-height: 38px;
-        transition: background .15s ease, color .15s ease;
-    }
-    [data-testid="stSidebar"] [role="radiogroup"] label:hover {
-        background: rgba(255,255,255,.12);
-    }
-    [data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {
-        background: rgba(229, 237, 244, .32);
-        box-shadow: inset 3px 0 0 #ffd1df;
-        font-weight: 700;
-    }
-    [data-testid="stSidebar"] [role="radiogroup"] div[data-testid="stMarkdownContainer"] p {
-        font-size: .92rem;
-        line-height: 1.2;
     }
     .main-title {
         font-size: clamp(2rem, 4vw, 3.6rem);
@@ -92,22 +64,6 @@ st.markdown(
         border: 1px solid rgba(255,255,255,.10);
         border-radius: 8px;
         overflow: hidden;
-    }
-    .sidebar-card {
-        margin-top: 1.5rem;
-        padding: 1rem;
-        border-top: 1px solid rgba(255,255,255,.18);
-        border-bottom: 1px solid rgba(255,255,255,.18);
-        color: #e7edf2;
-    }
-    .sidebar-card h3 {
-        font-size: 1rem;
-        margin-bottom: .45rem;
-    }
-    .sidebar-card p {
-        color: #cfd7de;
-        font-size: .84rem;
-        line-height: 1.45;
     }
     </style>
     """,
@@ -273,20 +229,12 @@ def show_result_files(title: str, csv_files: list[str], image_files: list[str]) 
 
 def render_sidebar() -> str:
     with st.sidebar:
-        st.markdown("### AIDEOM-VN")
-        labels = list(LABEL_TO_KEY.keys())
-        selected = st.radio("Navigation", labels, label_visibility="collapsed", index=len(labels) - 1)
-        st.markdown(
-            """
-            <div class="sidebar-card">
-                <h3>VN AIDEOM-VN</h3>
-                <p>Mô hình ra quyết định phát triển kinh tế Việt Nam kết hợp AI.</p>
-            </div>
-            """,
-            unsafe_allow_html=True,
+        selected = st.selectbox(
+            "Chọn bài",
+            list(MENU_OPTIONS.keys()),
+            index=len(MENU_OPTIONS) - 1,
         )
-        st.caption(f"Project root: {root}")
-    return LABEL_TO_KEY[selected]
+    return MENU_OPTIONS[selected]
 
 
 exercise = render_sidebar()
